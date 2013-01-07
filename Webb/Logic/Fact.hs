@@ -1,1 +1,11 @@
 module Webb.Logic.Fact where
+import Webb.Shared.Reference
+import Webb.Logic.Abstract
+
+-- A fact is a Name-Reference and a Value
+data Fact a = FactImpl Reference a
+ deriving (Eq, Show)
+
+-- Assert a fact has a given truth value
+(|=) :: AbstractLogic a => Reference -> a -> Fact a
+(|=) = FactImpl
