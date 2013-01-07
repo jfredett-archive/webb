@@ -1,18 +1,11 @@
-module Webb.Logic.Fact (
-  (|=), isKnownIn, isUnknownIn, empty, assumeFact, Fact, FactSet
+module Webb.Logic.Fact.FactSet(
+    isKnownIn, isUnknownIn, empty, assumeFact, FactSet
 ) where
-import qualified Data.Map as M
 
+import Webb.Logic.Fact.Fact
 import Webb.Shared.Reference
-import Webb.Logic.Abstract
 
--- A fact is a Name-Reference and a Value
-data Fact a = FactImpl Reference a
- deriving (Eq, Show)
-
--- Assert a fact has a given truth value
-(|=) :: AbstractLogic a => Reference -> a -> Fact a
-(|=) = FactImpl
+import qualified Data.Map as M
 
 -- A FactSet is a set of facts indexed by name, we need to provide a slightly
 -- altered API over FactSet, so we'll wrap in a newtype and alias appropriately
@@ -35,5 +28,6 @@ empty = FactSetImpl M.empty
 -- (potentially) new truth value
 assumeFact :: Fact a -> FactSet a -> FactSet a
 -- pretty sure this is fmap/lift M.insert
-assumeFact f@(FactImpl ref _) (FactSetImpl map) = FactSetImpl (M.insert ref f map)
+assumeFact f (FactSetImpl map) = FactSetImpl (M.insert (nameOf f) f map)
 
+-- TODO Remaining: Parser to parse a list of facts (probably just JSON)
