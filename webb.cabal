@@ -33,3 +33,19 @@ executable webb
                        containers == 0.4.2.*,
                        aeson == 0.6.1.*,
                        parsec
+
+test-suite test-webb
+  type: exitcode-stdio-1.0
+  main-is: Test/Main.hs
+  ghc-options: -Wall
+  build-depends:       base == 4.5.*,
+                       containers == 0.4.2.*,
+                       aeson == 0.6.1.*,
+                       QuickCheck,
+                       Cabal,
+                       parsec,
+                       test-framework,
+                       test-framework-hunit,
+                       test-framework-quickcheck2,
+                       HUnit,
+                       QuickCheck
