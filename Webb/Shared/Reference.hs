@@ -5,7 +5,6 @@ module Webb.Shared.Reference (
 ) where
 
 import Data.Aeson
-{-import Data.Aeson.Types-}
 import Control.Applicative
 import Data.Maybe
 
