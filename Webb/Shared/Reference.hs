@@ -7,6 +7,7 @@ module Webb.Shared.Reference (
 import Data.Aeson
 import Control.Applicative
 import Data.Maybe
+import Data.ByteString.Lazy (ByteString)
 
 newtype Reference = Ref String
   deriving (Eq, Ord)
@@ -41,10 +42,10 @@ instance FromJSON Reference where
   parseJSON (Object v) = Ref <$> v .: "ref"
   parseJSON _ = empty
 
-parseReference :: Value -> Reference
-parseReference v = case fromJSON v of
-  Error msg   -> error msg
-  Success ref -> ref
+parseReference :: ByteString -> Reference
+parseReference v = case eitherDecode v of
+  Left msg  -> error msg
+  Right ref -> ref
 
-dumpReference :: Reference -> Value
-dumpReference = toJSON
+dumpReference :: Reference -> ByteString
+dumpReference = encode

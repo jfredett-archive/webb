@@ -32,6 +32,7 @@ executable webb
   build-depends:       base == 4.5.*,
                        containers == 0.4.2.*,
                        aeson == 0.6.1.*,
+                       bytestring,
                        parsec
 
 test-suite test-webb
@@ -47,5 +48,6 @@ test-suite test-webb
                        test-framework,
                        test-framework-hunit,
                        test-framework-quickcheck2,
+                       bytestring,
                        HUnit,
                        QuickCheck
