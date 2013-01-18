@@ -5,6 +5,11 @@ class AbstractLogic a where
   (\/) :: a -> a -> a
   neg  :: a -> a
 
+instance AbstractLogic Bool where
+  (/\) = (&&)
+  (\/) = (||)
+  neg  = not
+
   -- laws:
   --
   -- neg . neg = id

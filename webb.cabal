@@ -33,6 +33,7 @@ executable webb
                        containers == 0.4.2.*,
                        aeson == 0.6.1.*,
                        bytestring,
+                       ghc-prim,
                        parsec
 
 test-suite test-webb
@@ -49,5 +50,6 @@ test-suite test-webb
                        test-framework-hunit,
                        test-framework-quickcheck2,
                        bytestring,
+                       ghc-prim,
                        HUnit,
                        QuickCheck
