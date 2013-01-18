@@ -1,8 +1,6 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 module Test.Webb.Shared.ReferenceTest where
 
-import Control.Applicative
-
 import Test.Framework
 import Test.Framework.Providers.QuickCheck2
 import Test.Framework.Providers.HUnit
@@ -12,6 +10,8 @@ import Test.HUnit hiding (Test) -- We don't need/want this one.
 
 import Webb.Shared.Reference
 
+import Test.ArbitraryImpl
+
 reference_tests :: Test
 reference_tests = testGroup "Reference" [
                     testProperty "A reference can be passed to and from JSON with no loss of information" prop_reference_json_id,
@@ -20,8 +20,6 @@ reference_tests = testGroup "Reference" [
                     testProperty "A reference cannot be named with a string containing other illegal characters" prop_reference_invalid_chars
                   ]
 
-instance Arbitrary Reference where
-  arbitrary = refer <$> arbitrary `suchThat` validReferenceName
 
 prop_reference_json_id :: Reference -> Property
 prop_reference_json_id ref = property $ (parseReference . dumpReference $ ref) == ref
